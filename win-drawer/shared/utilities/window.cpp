@@ -83,18 +83,22 @@ namespace window
 	void initialize( std::wstring name, void_t instance, uint_t x, uint_t y )
 	{ 
 		Gdiplus::GdiplusStartupInput input;
-		ulong_t token;
-
-		Gdiplus::GdiplusStartup( &token, &input, nullptr );
 
 		msg_t message{};
 		window_t window{};
+	
+		ulong_t token;
 
-		window::classes( instance, &window, L"Windrawer" );
+		if ( !Gdiplus::GdiplusStartup( &token, &input, nullptr ) )
+			return;
 
-		::CreateWindowW( L"Windrawer", name.c_str(), ( WS_OVERLAPPEDWINDOW | WS_VISIBLE ), 0, 0, x, y, 0, 0, 0, 0 );
-
-		window::message( message );
+		if ( window::classes( instance, &window, L"Windrawer" ) )
+		{
+			if ( ::CreateWindowW( L"Windrawer", name.c_str(), ( WS_OVERLAPPEDWINDOW | WS_VISIBLE ), 0, 0, x, y, 0, 0, 0, 0 ) )
+			{
+				window::message( message );
+			}
+		}
 
 		Gdiplus::GdiplusShutdown( token );
 	}
