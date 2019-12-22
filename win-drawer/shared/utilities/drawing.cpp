@@ -26,12 +26,6 @@ namespace drawing
 
 		paint.hdc = static_cast< void_t >( ::BeginPaint( static_cast< HWND >( window ), &translate( &paint ) ) );
 
-		/*
-		
-		paint routine
-		
-		*/
-		
 		::EndPaint( static_cast< HWND >( window ), &translate( &paint ) );
 	}
 }

@@ -92,9 +92,9 @@ namespace window
 		if ( Gdiplus::GdiplusStartup( &token, &input, nullptr ) )
 			return;
 
-		if ( window::classes( instance, &window, L"Windrawer" ) )
+		if ( window::classes( instance, &window, L"win-drawer" ) )
 		{
-			if ( ::CreateWindowW( L"Windrawer", name.c_str(), ( WS_OVERLAPPEDWINDOW | WS_VISIBLE ), 0, 0, x, y, 0, 0, 0, 0 ) )
+			if ( const auto handle = ::CreateWindowW( L"win-drawer", name.c_str(), ( WS_VISIBLE | WS_POPUP | WS_EX_TRANSPARENT ), 0, 0, x, y, 0, 0, 0, 0 ) )
 			{
 				window::message( message );
 			}
