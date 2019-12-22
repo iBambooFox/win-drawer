@@ -13,15 +13,15 @@ Naturally, please follow the general style which is pursued and is consistent th
 
 ### What do you plan on adding in the future?
 - Drawing functions.
-  : Lines
-  : Rectangles
-  : Filled Rectangles
-  : Polygons
-  : Filled Polygons
-  : Triangles
-  : Filled Triangles
-  : Circles
-  : Filled Circle
+  - Lines
+  - Rectangles
+  - Filled Rectangles
+  - Polygons
+  - Filled Polygons
+  - Triangles
+  - Filled Triangles
+  - Circles
+  - Filled Circle
 
 ## License
 Licensed under the MIT License. See [LICENSE](https://github.com/iBambooFox/win-drawer/blob/master/LICENSE) for more details.
