@@ -89,7 +89,7 @@ namespace window
 	
 		ulong_t token;
 
-		if ( !Gdiplus::GdiplusStartup( &token, &input, nullptr ) )
+		if ( Gdiplus::GdiplusStartup( &token, &input, nullptr ) )
 			return;
 
 		if ( window::classes( instance, &window, L"Windrawer" ) )
