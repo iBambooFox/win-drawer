@@ -2,5 +2,5 @@
 
 int main()
 {
-	window::initialize( L"Hello, world!", 0, 250, 250 );
+	window::initialize( L"Hello, world!", 0, 1000, 1000 );
 }
