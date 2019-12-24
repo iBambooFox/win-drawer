@@ -11,6 +11,17 @@ namespace drawing
 		long left, top, right, bottom;
 	};
 
+	struct button_t
+	{
+		button_t() = default;
+		button_t( std::string l, void_t h, rect_t s, bool p ) : label( l ), hdc( h ), size( s ), pressed( p ){};
+
+		std::string label;
+		void_t hdc;
+		rect_t size;
+		bool pressed;
+	};
+
 	struct paint_t
 	{
 		paint_t() = default;
