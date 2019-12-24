@@ -8,13 +8,28 @@ namespace window
 	{
 		drawing::paint_t paint{};
 
+		const auto fix_move = [&]( void_t window, uint_t msg, PARAMS)
+		{
+			auto result = ::DefWindowProcW( static_cast< HWND >( window ), msg, w, l );
+
+			if ( result == HTCLIENT )
+			{
+				result = HTCAPTION;
+			}
+
+			return result;
+		};
+
 		switch( msg )
 		{
 		case WM_DESTROY:
-			PostQuitMessage( 0 );
+			::PostQuitMessage( 0 );
 			break;
 		case WM_PAINT:
 			drawing::initialize( window, paint, size );
+			break;
+		case WM_NCHITTEST:
+			return fix_move( window, msg, w, l );
 			break;
 		default:
 			return ::DefWindowProcW( static_cast< HWND >( window ), msg, w, l );
@@ -55,7 +70,7 @@ namespace window
 		return ::RegisterClassW( &translate( window ) );
 	}
 
-	void message( msg_t msg )
+	void message( void_t window, msg_t msg )
 	{
 		const auto translate = [&]( const msg_t* msg )
 		{
@@ -97,6 +112,9 @@ namespace window
 		window::size[ 0 ] = x;
 		window::size[ 1 ] = y;
 
+		const int cen_x = ( GetSystemMetrics( SM_CXSCREEN ) / 2 ) - ( window::size[ 0 ] / 2 );
+		const int cen_y = ( GetSystemMetrics( SM_CYSCREEN ) / 2 ) - ( window::size[ 1 ] / 2 );
+
 		if ( Gdiplus::GdiplusStartup( &token, &input, nullptr ) )
 			return;
 
@@ -104,9 +122,9 @@ namespace window
 		{
 			if ( const auto handle = ::CreateWindowW( L"win-drawer", name.c_str(), ( WS_VISIBLE | WS_POPUP | WS_EX_TRANSPARENT ), 0, 0, window::size[ 0 ], window::size[ 1 ], 0, 0, 0, 0 ) )
 			{
-				::SetWindowPos( handle, 0, 250, 250, window::size[ 0 ], window::size[ 1 ], 0 );
+				::SetWindowPos( handle, 0, cen_x, cen_y, window::size[ 0 ], window::size[ 1 ], 0 );
 
-				window::message( message );
+				window::message( handle, message );
 			}
 		}
 
