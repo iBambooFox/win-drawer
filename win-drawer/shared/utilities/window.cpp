@@ -2,6 +2,8 @@
 
 namespace window
 {
+	uint_t size[ 2 ];
+
 	ulong_t procedure( void_t window, uint_t msg, PARAMS )
 	{
 		drawing::paint_t paint{};
@@ -12,7 +14,7 @@ namespace window
 			PostQuitMessage( 0 );
 			break;
 		case WM_PAINT:
-			drawing::initialize( window, paint );
+			drawing::initialize( window, paint, size );
 			break;
 		default:
 			return ::DefWindowProcW( static_cast< HWND >( window ), msg, w, l );
@@ -73,10 +75,13 @@ namespace window
 
 		auto message = translate( &msg );
 
-		while ( ::GetMessageA( &message, 0, 0, 0 ) )
+		while ( !::GetAsyncKeyState( VK_END ) )
 		{
-			::TranslateMessage( &message );
-			::DispatchMessageA( &message );
+			if ( ::GetMessageA( &message, 0, 0, 0 ) )
+			{
+				::TranslateMessage( &message );
+				::DispatchMessageA( &message );
+			}
 		}
 	}
 	
@@ -89,13 +94,18 @@ namespace window
 	
 		ulong_t token;
 
+		window::size[ 0 ] = x;
+		window::size[ 1 ] = y;
+
 		if ( Gdiplus::GdiplusStartup( &token, &input, nullptr ) )
 			return;
 
 		if ( window::classes( instance, &window, L"win-drawer" ) )
 		{
-			if ( const auto handle = ::CreateWindowW( L"win-drawer", name.c_str(), ( WS_VISIBLE | WS_POPUP | WS_EX_TRANSPARENT ), 0, 0, x, y, 0, 0, 0, 0 ) )
+			if ( const auto handle = ::CreateWindowW( L"win-drawer", name.c_str(), ( WS_VISIBLE | WS_POPUP | WS_EX_TRANSPARENT ), 0, 0, window::size[ 0 ], window::size[ 1 ], 0, 0, 0, 0 ) )
 			{
+				::SetWindowPos( handle, 0, 250, 250, window::size[ 0 ], window::size[ 1 ], 0 );
+
 				window::message( message );
 			}
 		}

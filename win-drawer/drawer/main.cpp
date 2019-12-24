@@ -2,5 +2,5 @@
 
 int main()
 {
-	window::initialize( L"Hello, world!", 0, 1000, 1000 );
+	window::initialize( L"ANIWARE", 0, 300, 300 );
 }

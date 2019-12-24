@@ -24,5 +24,5 @@ namespace drawing
 		int erase, restore, update;
 	};
 
-	void initialize( void_t window, paint_t& paint );
+	void initialize( void_t window, paint_t& paint, uint_t size[ 2 ] );
 }
