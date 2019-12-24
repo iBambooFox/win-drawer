@@ -112,8 +112,10 @@ namespace window
 		window::size[ 0 ] = x;
 		window::size[ 1 ] = y;
 
-		const int cen_x = ( GetSystemMetrics( SM_CXSCREEN ) / 2 ) - ( window::size[ 0 ] / 2 );
-		const int cen_y = ( GetSystemMetrics( SM_CYSCREEN ) / 2 ) - ( window::size[ 1 ] / 2 );
+		uint_t center[ 2 ] = {
+			( ::GetSystemMetrics( SM_CXSCREEN ) / 2 ) - ( window::size[ 0 ] / 2 ),
+			( ::GetSystemMetrics( SM_CYSCREEN ) / 2 ) - ( window::size[ 1 ] / 2 ),
+		};
 
 		if ( Gdiplus::GdiplusStartup( &token, &input, nullptr ) )
 			return;
@@ -122,7 +124,7 @@ namespace window
 		{
 			if ( const auto handle = ::CreateWindowW( L"win-drawer", name.c_str(), ( WS_VISIBLE | WS_POPUP | WS_EX_TRANSPARENT ), 0, 0, window::size[ 0 ], window::size[ 1 ], 0, 0, 0, 0 ) )
 			{
-				::SetWindowPos( handle, 0, cen_x, cen_y, window::size[ 0 ], window::size[ 1 ], 0 );
+				::SetWindowPos( handle, 0, center[ 0 ], center[ 1 ], window::size[ 0 ], window::size[ 1 ], 0 );
 
 				window::message( handle, message );
 			}
