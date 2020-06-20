@@ -74,6 +74,16 @@
     <IntDir>$(SolutionDir)\intermediates\</IntDir>
     <TargetName>win-drawer</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>output/</OutDir>
+    <IntDir>intermediates/</IntDir>
+    <TargetName>win-drawer</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>output/</OutDir>
+    <IntDir>intermediates/</IntDir>
+    <TargetName>win-drawer</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -92,6 +102,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,6 +131,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +145,7 @@
     <ClInclude Include="shared\utilities\window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="drawer\main.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="shared\utilities\drawing.cpp" />
     <ClCompile Include="shared\utilities\window.cpp" />
   </ItemGroup>

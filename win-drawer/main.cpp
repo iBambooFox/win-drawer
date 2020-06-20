@@ -1,4 +1,4 @@
-#include "../shared/shared.hpp"
+#include "shared/shared.hpp"
 
 int main()
 {

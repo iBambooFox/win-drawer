@@ -8,6 +8,6 @@
   <ItemGroup>
     <ClCompile Include="shared\utilities\drawing.cpp" />
     <ClCompile Include="shared\utilities\window.cpp" />
-    <ClCompile Include="drawer\main.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
 </Project>
